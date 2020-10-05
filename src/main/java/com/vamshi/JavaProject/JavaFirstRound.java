@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.StringTokenizer;
 import java.util.TreeSet;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 public class JavaFirstRound {
 	
@@ -53,9 +55,21 @@ public class JavaFirstRound {
 	  }
 	   //print result
 	   if(!set.isEmpty()) {
-	     set.forEach((strr)->{
-	    	 System.out.print(strr+" ");
-	     });
+				/*
+				 * set.forEach((strr)->{ System.out.print(strr+" "); });
+				 */
+		   
+		   Set<String> printSet=set.stream().filter(p->p.startsWith("parent")).collect(Collectors.toSet());
+		   printSet.forEach((strr)->{ System.out.print(strr+" "); });
+		   if(printSet.isEmpty()) {
+			 Set printSet2 = set.stream().filter(p->p.startsWith("child")).collect(Collectors.toSet());
+			 printSet2.forEach((strr)->{ System.out.print(strr+" "); });
+			 if(printSet2.isEmpty()) {
+				 Set printSet3=set.stream().filter(p->p.startsWith("grandchild")).collect(Collectors.toSet());
+				 printSet3.forEach((strr)->{ System.out.print(strr+" "); });
+				 
+			 }
+		   }
 	   }
 	   
 
@@ -68,12 +82,19 @@ public class JavaFirstRound {
 	//internal index finding
 	public static void findByIndex(int i,int j){
 		for(int index=i;index<j;index++) {
+			 //boolean checker=list.stream().anyMatch(p->p.startsWith("parent"));
          	String s=list.get(index);
          	   String result1 =s.replaceAll("[/]", "");
-         	   if(result1.startsWith("child")||result1.startsWith("parent")) { 
-         		   set.add(result1);
-         	   }	   
+         	   
+         		  if(result1.startsWith("parent")||result1.startsWith("child")||result1.startsWith("grandchild")) { 
+             		   set.add(result1);
+             		   
+             	
+         	   }
+         		  
+         	  
          }
+		
 		
 	}
 	
