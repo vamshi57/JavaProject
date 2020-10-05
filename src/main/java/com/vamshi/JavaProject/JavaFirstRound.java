@@ -123,7 +123,7 @@ public class JavaFirstRound {
 		if(list.get(rLno)!=null)
 		{
 		  testStr=list.get(rLno);
-		  if(testStr.startsWith("p")) {
+		  if(testStr.startsWith("p")||testStr.startsWith("c")) {
 			  fetchByParentName(testStr);
 		  }
 		  else {
